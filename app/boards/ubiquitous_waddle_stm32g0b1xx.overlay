@@ -1,0 +1,37 @@
+/*
+ * Copyright (c) 2025 leonwip
+ * SPDX-License-Identifier: Apache-2.0
+ */
+
+#include "../app.overlay"
+
+/ {
+	cannectivity: cannectivity {
+		compatible = "cannectivity";
+		timestamp-counter = <&counter2>;
+
+		channel1 {
+			compatible = "cannectivity-channel";
+			can-controller = <&fdcan1>;
+			state-led = <&led_sta1>;
+			activity-leds = <&led_act1>;
+		};
+
+		channel2 {
+			compatible = "cannectivity-channel";
+			can-controller = <&fdcan2>;
+			state-led = <&led_sta2>;
+			activity-leds = <&led_act2>;
+		};
+	};
+};
+
+&timers2 {
+	status = "okay";
+	st,prescaler = <63>;
+
+	counter2: counter2 {
+		compatible = "st,stm32-counter";
+		status = "okay";
+	};
+};
